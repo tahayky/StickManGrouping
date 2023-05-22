@@ -55,8 +55,7 @@ namespace Centurion.CGSHC01.Game
         public void SetHealth(float amount)
         {
             health += amount;
-            if (on_damage != null)
-                on_damage(health);
+                on_damage?.Invoke(health);
         }
 
         public void Damage(float amount)
@@ -124,8 +123,7 @@ namespace Centurion.CGSHC01.Game
                 default:
                     throw new ArgumentOutOfRangeException(nameof(new_state), new_state, null);
             }
-            if (on_state_changed != null)
-                on_state_changed(character_state,this);
+                on_state_changed?.Invoke(character_state,this);
         }
 
         protected virtual void HandleIdle()
