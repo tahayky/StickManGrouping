@@ -7,11 +7,8 @@ namespace Centurion.CGSHC01.Game
     [RequireComponent(typeof(SphereCollider))]
     public class CharacterFov : MonoBehaviour
     {
-        public delegate void OnTriggerEntered(string tag);
-        public event OnTriggerEntered on_trigger_entered;
-
-        public delegate void OnTriggerLeaved(string tag);
-        public event OnTriggerLeaved on_trigger_leaved;
+        public Action<string> on_trigger_entered;
+        public Action<string> on_trigger_leaved;
 
         public LayerMask raycast_mask;
         public bool enable_raycast = false;
