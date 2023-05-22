@@ -6,8 +6,7 @@ namespace Centurion.CGSHC01.Game
 {
     public class GameManager : StaticInstance<GameManager>
     {
-        public delegate void OnStateChanged(GameState current_state);
-        public event OnStateChanged on_state_changed;
+        public Action<GameState> on_state_changed;
         public GameState game_state { get; private set; }
 
         void Start() => ChangeState(GameState.Starting);
@@ -36,8 +35,7 @@ namespace Centurion.CGSHC01.Game
                 default:
                     throw new ArgumentOutOfRangeException(nameof(new_state), new_state, null);
             }
-            if (on_state_changed != null)
-                on_state_changed(new_state);
+                on_state_changed?.Invoke(new_state);
         }
         void HandleStarting()
         {
