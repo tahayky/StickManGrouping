@@ -9,8 +9,7 @@ namespace Centurion.CGSHC01.Game
 {
     public class GroupManager : Singleton<GroupManager>
     {
-        public delegate void OnGroupsUpdated();
-        public event OnGroupsUpdated on_groups_updated;
+        public Action on_groups_updated;
 
         public List<PawnGroup> pawn_groups = new List<PawnGroup>();
 
@@ -124,8 +123,7 @@ namespace Centurion.CGSHC01.Game
         }
         public void OnGroupsUpdate()
         {
-            if (on_groups_updated != null)
-                on_groups_updated();
+                on_groups_updated?.Invoke();
         }
         public void CreateGroup(Pawn first_member)
         {
