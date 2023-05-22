@@ -5,12 +5,9 @@ using System;
 namespace Centurion.CGSHC01.Game
 {
     public class Character : MonoBehaviour, IDamageable, IDevelopable, ITouchable
-    {
-        public delegate void OnDamageReceived(float current_health);
-        public event OnDamageReceived on_damage;
-
-        public delegate void OnStateChanged(CharacterState current_stat, ITouchable touchable);
-        public event OnStateChanged on_state_changed;
+    {        
+        public Action<float> on_damage;
+        public Action<CharacterState,ITouchable> on_state_changed;
 
         [HideInInspector] public CharacterState character_state = CharacterState.Insensitive;
 
