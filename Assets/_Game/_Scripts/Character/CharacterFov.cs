@@ -29,8 +29,7 @@ namespace Centurion.CGSHC01.Game
             }
             obj = detected_objects.AllValues();
             touchable.game_object.GetComponent<Character>().on_state_changed -= RemoveDeads;
-            if (on_trigger_leaved != null)
-                on_trigger_leaved(touchable.game_object.tag);
+                on_trigger_leaved?.Invoke(touchable.game_object.tag);
         }
         private void OnTriggerEnter(Collider other)
         {
@@ -47,8 +46,7 @@ namespace Centurion.CGSHC01.Game
                         detected_objects.Add(other.tag, other.gameObject);
                         obj = detected_objects.AllValues();
                         other.gameObject.GetComponent<Character>().on_state_changed += RemoveDeads;
-                        if (on_trigger_entered != null)
-                            on_trigger_entered(other.tag);
+                            on_trigger_entered?.Invoke(other.tag);
                         
                     }
                 }
@@ -58,8 +56,7 @@ namespace Centurion.CGSHC01.Game
             detected_objects.Add(other.tag, other.gameObject);
             obj = detected_objects.AllValues();
             other.gameObject.GetComponent<Character>().on_state_changed += RemoveDeads;
-            if (on_trigger_entered != null)
-                on_trigger_entered(other.tag);
+                on_trigger_entered?.Invoke(other.tag);
         }
         private void OnTriggerExit(Collider other)
         {
@@ -67,8 +64,7 @@ namespace Centurion.CGSHC01.Game
                 detected_objects.Remove(other.tag,other.gameObject);
             obj = detected_objects.AllValues();
             other.gameObject.GetComponent<Character>().on_state_changed -= RemoveDeads;
-            if (on_trigger_leaved != null)
-                on_trigger_leaved(other.tag);
+                on_trigger_leaved?.Invoke(other.tag);
         }
     }
 }
